@@ -1,0 +1,44 @@
+{% extends "base_event.html" %}
+
+{% block event_title %} Player {{player_name}} {% end %}
+
+{% block event_content %}
+<div id="ai_action">
+  <!-- hide cards-->
+  {% if hide_cards %}
+    <h3>Player {{player_name}} hides their cards.</h3>
+    {% for card in hole_card %}
+      <img class="card" src="{{ static_url("images/card_BB.png") }}" >
+    {% end %}
+  {% else %}
+    <h3>Hole Card : {{hole_card}}</h3>
+    {% for card in hole_card %}
+      <img class="card" src="{{ static_url("images/card_%s.png" % card) }}" >
+    {% end %}
+  {% end %}
+
+  
+
+  <h3>Valid Actions</h3>
+  <ul class="list-group">
+    {% for act in valid_actions %}
+    <li class="list-group-item">
+      <span>{{act['action'].upper()}}</span>
+        :
+      <span>{{act['amount']}}</span>
+    </li>
+    {% end %}
+  </ul>
+
+  <h3>Chosen Action</h3>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span>{{action.upper()}}</span>
+        :
+      <span>{{amount}}</span>
+    </li>
+  </ul>
+  <span style="display:none">>Action History: {{action_histories }}</span>
+  <button type="button" class="btn btn-primary" id="ai_continue_button">Continue</button>
+</div>
+{% end %}

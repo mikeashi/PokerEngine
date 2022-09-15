@@ -1,0 +1,26 @@
+ante: 0
+blind_structure: null
+initial_stack: 100
+max_round: 10
+small_blind: 10
+ai_players:
+- name: fish_player_1
+  path: /app/players/fish_player.py
+- name: honest_player_1
+  path: /app/players/fish_player.py
+- name: bold_player_1
+  path: /app/players/bold_player.py
+- name: random_player_1
+  path: /app/players/random_player.py
+- name: fish_player_2
+  path: /app/players/fish_player.py
+- name: fish_player_3
+  path: /app/players/fish_player.py
+- name: fish_player_4
+  path: /app/players/fish_player.py
+- name: fish_player_5
+  path: /app/players/fish_player.py
+- name: fish_player_6
+  path: /app/players/fish_player.py
+- name: fish_player_7
+  path: /app/players/fish_player.py

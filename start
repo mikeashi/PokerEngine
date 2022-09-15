@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ "$(docker images -q myimage:mytag 2> /dev/null)" == "" ]]; then
+  echo "[-] Image not found..."
+  echo "[+] Building image..."
+  ./install
+fi
+
+
+(sleep 2 && xdg-open http://localhost:8888) &
+docker run -it --rm --name=poker_gui_test -v $(pwd)/Config:/app -p 8888:8000 poker_gui
