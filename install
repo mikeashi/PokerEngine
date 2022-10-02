@@ -1,4 +1,0 @@
-#!/bin/bash
-cd PyPokerGUI
-docker build -t poker_gui .
-

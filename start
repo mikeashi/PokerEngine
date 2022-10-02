@@ -1,9 +1,14 @@
 #!/bin/bash
 
-if [[ "$(docker images -q myimage:mytag 2> /dev/null)" == "" ]]; then
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management 2> /dev/null
+
+if [[ "$(docker images -q poker_gui 2> /dev/null)" == "" ]]; then
   echo "[-] Image not found..."
   echo "[+] Building image..."
-  ./install
+  docker rmi poker_gui -f
+  cd PyPokerGUI
+  docker build -t poker_gui .
+  cd ..
 fi
 
 

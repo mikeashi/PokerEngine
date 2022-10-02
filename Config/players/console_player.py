@@ -78,3 +78,6 @@ class ConsolePlayer(BasePokerPlayer):
         except:
             print("Invalid input received. Try again.")
             return self.__receive_raise_amount_from_console(min_amount, max_amount)
+            
+def setup_ai():
+    return ConsolePlayer()
