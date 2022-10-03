@@ -14,6 +14,7 @@ import webbrowser
 
 from pypokergui.server.poker import start_server
 from pypokergui.config_builder import build_config
+from pypokergui.cli.manager import manager
 
 @click.group()
 def cli():
@@ -36,6 +37,14 @@ def serve_command(config, port, speed):
 def build_config_command(maxround, stack, small_blind, ante):
     build_config(maxround, stack, small_blind, ante, None)
 
+
+@cli.command(name="cli")
+@click.argument("config")
+@click.option("-r", "--rounds", default=10, help="number of rounds to play")
+@click.option("-v", "--verbose", default=0, help="output verbosity")
+def cli_command(config, rounds, verbose):
+    # pypokergui cli /src/Pokershark/conf.yaml -r 1 -v 2
+    server_manager = manager(config,rounds, verbose)
 
 if __name__ == '__main__':
     cli()
