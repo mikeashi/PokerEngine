@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# pypokergui serve /src/Pokershark/conf.yaml --port 8000
+# pypokergui cli /src/Pokershark/conf.yaml -r 1 -v 2
+
+pypokergui cli /src/Pokershark/conf.yaml -r 100 -v 1
+
+

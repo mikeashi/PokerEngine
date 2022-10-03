@@ -26,7 +26,11 @@ EXPOSE 8000/tcp
 STOPSIGNAL SIGTERM
 
 # entry point
+COPY ./doc-config /src/doc-config
+Run chmod +x /src/doc-config/entry
+
 #ENTRYPOINT ["pypokergui", "serve", "/src/Pokershark/conf.yaml", "--port", "8000"]
 # pypokergui serve /src/Pokershark/conf.yaml --port 8000
 # pypokergui cli /src/Pokershark/conf.yaml -r 1 -v 2
-ENTRYPOINT ["/bin/bash"]
+
+ENTRYPOINT ["/src/doc-config/entry"]
