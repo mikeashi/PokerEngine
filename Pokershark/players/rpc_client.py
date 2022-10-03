@@ -1,11 +1,12 @@
 import pika
 import uuid
 import json
+import socket
 
 class rpc_client:
     def __init__(self):
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='host.docker.internal'))
+            pika.ConnectionParameters(host=socket.gethostbyname(socket.gethostname())[:-1] + "1", port=5672))
         self.channel = self.connection.channel()
         result = self.channel.queue_declare(queue='', exclusive=True)
         self.callback_queue = result.method.queue

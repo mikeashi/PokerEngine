@@ -27,4 +27,5 @@ STOPSIGNAL SIGTERM
 
 # entry point
 #ENTRYPOINT ["pypokergui", "serve", "/src/Pokershark/conf.yaml", "--port", "8000"]
+# pypokergui serve /src/Pokershark/conf.yaml --port 8000
 ENTRYPOINT ["/bin/bash"]

@@ -24,6 +24,14 @@ class HandEvaluator:
       FOURCARD: "FOURCARD",
       STRAIGHTFLASH: "STRAIGHTFLASH"
   }
+  
+  @classmethod
+  def get_card_str(self, card):
+        suits = {"S" : "Spades", "H":"Hearts", "D":"Diamonds", "C":"Clubs"}
+        ranks = {"2" : "Two", "3" : "Three", "4" : "Four", "5" : "Five","6" :  "Six","7" :  "Seven","8" :  "Eight", "9" : "Nine","T" :  "Ten","J" : "Jack", "Q" :"Queen","K" : "King","A" : "Ace"}
+        rank = ranks[card.RANK_MAP[card.rank]]
+        suit = suits[card.SUIT_MAP[card.suit]]
+        return "{0}Of{1}".format(rank, suit)
 
   @classmethod
   def gen_hand_rank_info(self, hole, community):
@@ -38,6 +46,9 @@ class HandEvaluator:
     return {
         "hand" : {
           "strength" : strength,
+          # get each player hand cards.
+          "cards": [str(card) for card in hole],
+          "formated_cards": [self.get_card_str(card) for card in hole],
           "high" : hand_high,
           "low" : hand_low
         },

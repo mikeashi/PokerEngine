@@ -26,9 +26,9 @@ class RemotePlayer(BasePokerPlayer):
 
 
     def receive_round_result_message(self, winners, hand_info, round_state):
-        self.client.call("game.result", {"winners":winners, "hand_info":hand_info, "round_state":self.format_round_state(round_state)})
+        self.client.call("round.result", {"winners":winners, "hand_info":hand_info, "round_state":self.format_round_state(round_state)})
 
-    
+
     # Helpers functions ......
     def get_hole_card(self,hole_card):
         return [self.get_card_str(Card.from_str(hole_card[0])), self.get_card_str(Card.from_str(hole_card[1]))]
