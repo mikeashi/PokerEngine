@@ -7,10 +7,12 @@ if [[ "$(docker images -q poker_gui 2> /dev/null)" == "" ]]; then
   echo "[+] Building image..."
   docker rmi poker_gui -f
   cd PyPokerGUI
+  rm Config -rf
+  cp ../Config .
   docker build -t poker_gui .
   cd ..
 fi
 
 
 (sleep 2 && xdg-open http://localhost:8888) &
-docker run -it --rm --name=poker_gui_test -v $(pwd)/Config:/app -p 8888:8000 poker_gui
+docker run -it --rm --name=poker_gui_test -p 8888:8000 poker_gui
