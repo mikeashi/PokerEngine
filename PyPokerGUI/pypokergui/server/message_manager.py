@@ -76,6 +76,7 @@ def _gen_start_game_message(handler, game_manager, uuid):
 
 
 def broadcast_update_game(handler, game_manager, sockets, mode="moderate"):
+    mode = "fast"
     for destination, update in game_manager.latest_messages:
         for uuid in _parse_destination(destination, game_manager, sockets):
             if len(str(uuid)) <= 2:
@@ -120,7 +121,7 @@ def _gen_game_update_message(handler, message):
         round_state = message["message"]["round_state"]
         street = message["message"]["street"]
         table_html_str = handler.render_string(
-            "round_state.html", round_state=round_state
+            "round_state.html", round_state=round_state, action_histories ={'action_histories': {}}
         )
         event_html_str = handler.render_string("event_street_start.html", street=street)
         content = {
@@ -132,8 +133,9 @@ def _gen_game_update_message(handler, message):
         round_state = message["message"]["round_state"]
         action = message["message"]["action"]
         action_histories = message["message"]["action_histories"]
+        id_player = {p["uuid"]: p["name"] for p in round_state["seats"]}
         table_html_str = handler.render_string(
-            "round_state.html", round_state=round_state
+            "round_state.html", round_state=round_state, action_histories=action_histories,id_player=id_player
         )
         event_html_str = handler.render_string(
             "event_update_game.html", action=action, round_state=round_state
@@ -149,7 +151,7 @@ def _gen_game_update_message(handler, message):
         winners = message["message"]["winners"]
         round_count = message["message"]["round_count"]
         table_html_str = handler.render_string(
-            "round_state.html", round_state=round_state
+            "round_state.html", round_state=round_state,action_histories={'action_histories': {}}
         )
         event_html_str = handler.render_string(
             "event_round_result.html",
@@ -177,8 +179,9 @@ def _gen_game_update_message(handler, message):
         hole_card = message["message"]["hole_card"]
         valid_actions = message["message"]["valid_actions"]
         action_histories = message["message"]["action_histories"]
+        id_player = {p["uuid"]: p["name"] for p in round_state["seats"]}
         table_html_str = handler.render_string(
-            "round_state.html", round_state=round_state
+            "round_state.html", round_state=round_state,action_histories=action_histories,id_player=id_player
         )
         event_html_str = handler.render_string(
             "event_ask_action.html",
@@ -258,10 +261,10 @@ MODERATE_WAIT_INTERVAL = {
 }
 
 FAST_WAIT_INTERVAL = {
-    "round_start_message": 1,
+    "round_start_message": 0,
     "street_start_message": 0.5,
     "ask_message": 0,
-    "game_update_message": 0.5,
+    "game_update_message": 1,
     "round_result_message": 3,
     "game_result_message": 0,
 }

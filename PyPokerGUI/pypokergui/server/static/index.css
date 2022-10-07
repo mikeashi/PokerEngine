@@ -59,6 +59,10 @@ body {
   margin-top: 50px;
 }
 
+#round_log{
+  margin-top: 10px;
+}
+
 #event_content {
   padding: 10px;
 }

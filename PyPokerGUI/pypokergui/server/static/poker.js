@@ -153,6 +153,7 @@ var updater = {
     newStreet: function(table_html, event_html) {
       $("#table").html($(table_html))
       $("#event_box").html($(event_html))
+      $("#round_log").hide()
     },
 
     newAction: function(table_html, event_html) {
@@ -163,6 +164,7 @@ var updater = {
     roundResult: function(table_html, event_html) {
       $("#table").html($(table_html))
       $("#event_box").html($(event_html))
+      $("#round_log").hide()
     },
 
     gameResult: function(event_html) {
@@ -175,13 +177,14 @@ var updater = {
     },
 
     showAiState: function(table_html, event_html) {
-      $("#table").html($(table_html))
-      $("#event_box").html($(event_html))
-      $("#ai_continue_button").on("click", function() {
+      //$("#table").html($(table_html))
+      //$("#event_box").html($(event_html))
+      //$("#ai_continue_button").on("click", function() {
         message['type'] = "action_ai_continue"
         updater.socket.send(JSON.stringify(message))
-        return false;
-      });
+       // return false;
+      //});
+      //$("#round_log").show()
     },
 
     alert_restart_server: function(message) {

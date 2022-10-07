@@ -69,4 +69,59 @@
     </div>
 
   </div>
+  <!-- log -->
+  <div id="round_log">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Round log</h3>
+      </div>
+      <div class="panel-body" style="padding: 0; height: 80px;overflow: auto;padding-top: 10px;">
+        
+        <ul>
+          {% if 'river' in action_histories['action_histories']%}
+            {% for action in reversed(action_histories['action_histories']['river']) %}
+              <li>
+                stage: River,
+                player: {{ id_player[action['uuid']] }},
+                type: {{ action['action'] }},
+                amount: {% if 'amount' in action %}{{ action['amount'] }}{% else %}-{% end %}
+              </li>
+            {% end %}
+          {% end %}
+          {% if 'turn' in action_histories['action_histories']%}
+            {% for action in reversed(action_histories['action_histories']['turn']) %}
+              <li>
+                stage: Turn,
+                player: {{ id_player[action['uuid']] }},
+                type: {{ action['action'] }},
+                amount: {% if 'amount' in action %}{{ action['amount'] }}{% else %}-{% end %}
+              </li>
+            {% end %}
+          {% end %}
+          {% if 'flop' in action_histories['action_histories']%}
+            {% for action in reversed(action_histories['action_histories']['flop']) %}
+              <li>
+                stage: Flop,
+                player: {{ id_player[action['uuid']] }},
+                type: {{ action['action'] }},
+                amount: {% if 'amount' in action %}{{ action['amount'] }}{% else %}-{% end %}
+              </li>
+            {% end %}
+          {% end %}
+          {% if 'preflop' in action_histories['action_histories']%}
+            {% for action in reversed(action_histories['action_histories']['preflop']) %}
+              <li>
+                stage: Preflop,
+                player: {{ id_player[action['uuid']] }},
+                type: {{ action['action'] }},
+                amount: {% if 'amount' in action %}{{ action['amount'] }}{% else %}-{% end %}
+              </li>
+            {% end %}
+          {% end %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- log-->
+
 </div>

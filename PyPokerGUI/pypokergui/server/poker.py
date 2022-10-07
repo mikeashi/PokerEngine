@@ -142,7 +142,8 @@ class PokerWebSocketHandler(tornado.websocket.WebSocketHandler):
         round_state = ask_content["message"]["round_state"]
         hole_card = ask_content["message"]["hole_card"]
         action_histories = ask_content["message"]["action_histories"]
-        table_html_str = self.render_string("round_state.html", round_state=round_state)
+        id_player = {p["uuid"]: p["name"] for p in round_state["seats"]}
+        table_html_str = self.render_string("round_state.html", round_state=round_state, action_histories=action_histories,id_player=id_player)
         player_name = "unknown"
         for player in round_state["seats"]:
             if player["uuid"] == ask_uuid:
