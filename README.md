@@ -17,7 +17,7 @@ The game configuration and bot players settings can be found under `Config`.
 [Pokershark](https://github.com/mikeashi/PokerShark) is C# based, therefor we needed to develop an interface to communicat with the bot. The communication interface can be found under `Config\players\remote_player.py`, it uses RabbitMQ for RCP.
 
 # Start server
-This repository provides an easy to use docker image. To start container under windows you can use the provided "start.ps1" powershell script, to start under linux use the provided "start" bash script.
+This repository provides an easy to use docker image. To start container under windows you can use the provided "start.ps1" powershell script, to start under linux use the provided "start" bash script (SCRIPT NOT TESTED).
 
 ## web mode:
 
