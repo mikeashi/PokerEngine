@@ -1,18 +1,47 @@
 #!/bin/bash
 
-docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management 2> /dev/null
 
-if [[ "$(docker images -q poker_gui 2> /dev/null)" == "" ]]; then
-  echo "[-] Image not found..."
-  echo "[+] Building image..."
+# start RabbitMQ if needed
+if [ ! "$(docker ps -q -f name=rabbitmq)" ]; then
+  echo "Starting RabbitMQ Server"
+  docker run -d -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management 2> /dev/null
+fi
+
+# stop old server
+if [[ -z "$(docker ps -q -f name=poker_server_test)" ]]; then
+  echo "Stopping old conatiner"
+  docker stop poker_server_test
+fi
+
+echo "Starting Poker Server"
+
+# remove image if found
+if [[ -z "$(docker images -q poker_server)" ]]; then
+  echo "Removing poker_server image"
   docker rmi poker_gui -f
-  cd PyPokerGUI
-  rm Config -rf
-  cp ../Config .
-  docker build -t poker_gui .
-  cd ..
 fi
 
 
-(sleep 2 && xdg-open http://localhost:8888) &
-docker run -it --rm --name=poker_gui_test -p 8888:8000 poker_gui
+echo "Building poker_server image"
+docker build -t poker_server .
+
+if [ $# -eq 0 ]; then
+    echo "Starting container in server mode"
+    (sleep 2 && xdg-open http://localhost:8888) &
+    docker run -d -it --rm --name=poker_gui_test -p 8888:8000 poker_gui server
+fi
+
+if [ $1 = 'cli' ]; then
+    echo "Starting in cli mode"
+    docker run -d -it --rm --name=poker_gui_test -p 8888:8000 poker_gui cli
+fi
+
+if [ $1 = 'server' ]; then
+    echo "Starting in cli mode"
+    (sleep 2 && xdg-open http://localhost:8888) &
+    docker run -d -it --rm --name=poker_gui_test -p 8888:8000 poker_gui server
+fi
+
+echo "Poker server Ended"
+
+

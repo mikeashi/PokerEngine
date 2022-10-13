@@ -19,18 +19,14 @@ COPY ./PyPokerGUI /src/pypokergui
 RUN pip install -e /src/pypokergui
 
 # setup players
-COPY ./Pokershark /src/Pokershark
+COPY ./Config /src/config
 
 # configure server
 EXPOSE 8000/tcp
-STOPSIGNAL SIGTERM
 
 # entry point
-COPY ./doc-config /src/doc-config
-Run chmod +x /src/doc-config/entry
-
-#ENTRYPOINT ["pypokergui", "serve", "/src/Pokershark/conf.yaml", "--port", "8000"]
-# pypokergui serve /src/Pokershark/conf.yaml --port 8000
-# pypokergui cli /src/Pokershark/conf.yaml -r 1 -v 2
-
-ENTRYPOINT ["/src/doc-config/entry"]
+COPY ./docker /src/docker
+Run chmod +x /src/docker/entry.sh
+# fix stupid line endings bug
+RUN sed -i -e 's/\r$//' /src/docker/entry.sh
+ENTRYPOINT ["./src/docker/entry.sh"]
