@@ -36,6 +36,7 @@ class manager:
         max = 0
         for player in game_result["players"]:
             if player["stack"] > max:
+                winners = []
                 winners.append(player["name"])
                 max = player["stack"]
         
