@@ -1,6 +1,10 @@
 # PokerServer
 Poker server with web GUI, where human and AI players can play poker holdem.
 
+<p align="center" width="100%">
+    <img src="https://github.com/ishikota/PyPokerGUI/blob/master/screenshot/poker_demo.gif"> 
+</p>
+
 Poker Server is based on two projects:
 
 - [PyPokerEngine](https://github.com/ishikota/PyPokerEngine).
@@ -29,4 +33,10 @@ This repository provides an easy to use docker image. To start container under w
 
 ```
 .\start.ps1 cli
+```
+
+## evaluation mode:
+
+```
+.\start.ps1 ev
 ```
