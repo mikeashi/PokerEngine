@@ -33,6 +33,11 @@ elseif($args[0] -eq "cli"){
     Write-Output "Starting container in cli mode"
     docker run -it --rm --name=poker_server_test -p 80:8000 poker_server cli
 }
+# else if argument ev is passed, start ev
+elseif($args[0] -eq "ev"){
+    Write-Output "Starting container in cli mode"
+    docker run -it --rm --name=poker_server_test -p 80:8000 poker_server ev
+}
 # else if argument is passed, pass it to docker
 elseif($args[0]){
     Write-Output "Starting container"

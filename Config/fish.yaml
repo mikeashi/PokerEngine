@@ -1,0 +1,13 @@
+ante: 0
+blind_structure: null
+initial_stack: 1000
+max_round: 100
+small_blind: 10
+ai_players:
+
+- name: Fish
+  path: /src/config/players/fish_player.py
+
+
+- name: PokerShark
+  path: /src/config/players/remote_player.py

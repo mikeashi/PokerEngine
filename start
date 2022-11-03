@@ -33,7 +33,12 @@ fi
 
 if [ $1 = 'cli' ]; then
     echo "Starting in cli mode"
-    docker run -d -it --rm --name=poker_gui_test -p 8888:8000 poker_gui cli
+    docker run -it --rm --name=poker_gui_test -p 8888:8000 poker_gui cli
+fi
+
+if [ $1 = 'ev' ]; then
+    echo "Starting in evaluation mode"
+    docker run -it --rm --name=poker_server_test -p 8888:8000 poker_server ev
 fi
 
 if [ $1 = 'server' ]; then
